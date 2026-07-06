@@ -1,0 +1,107 @@
+// mobile nav toggle
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+if (navToggle) {
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll(':scope > a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+}
+
+// nav dropdown (About Us) — toggles on mobile, hover on desktop via CSS
+document.querySelectorAll('.has-dropdown > a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    if (window.innerWidth <= 760) {
+      e.preventDefault();
+      link.closest('.has-dropdown').classList.toggle('open');
+    }
+  });
+});
+
+// scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  q.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+      if (openItem !== item) {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-a').style.maxHeight = null;
+      }
+    });
+    if (isOpen) {
+      item.classList.remove('open');
+      a.style.maxHeight = null;
+    } else {
+      item.classList.add('open');
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+
+// ---------- Testimonial submission ----------
+// TODO: paste the real submission endpoint here once it's shared with you.
+const TESTIMONIAL_ENDPOINT = "PASTE_TESTIMONIAL_ENDPOINT_HERE";
+
+const testiToggle = document.getElementById('testiToggle');
+const testiForm = document.getElementById('testiForm');
+if (testiToggle && testiForm) {
+  testiToggle.addEventListener('click', () => {
+    testiForm.classList.toggle('open');
+  });
+}
+
+const testiSubmitForm = document.getElementById('testiSubmitForm');
+if (testiSubmitForm) {
+  testiSubmitForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = document.getElementById('testiStatus');
+    const name = document.getElementById('testiName').value.trim();
+    const edition = document.getElementById('testiEdition').value.trim();
+    const quote = document.getElementById('testiQuote').value.trim();
+
+    if (!name || !quote) {
+      status.textContent = "Please fill in your name and your testimonial.";
+      status.style.color = "#B5563C";
+      return;
+    }
+
+    if (!TESTIMONIAL_ENDPOINT || TESTIMONIAL_ENDPOINT === "PASTE_TESTIMONIAL_ENDPOINT_HERE") {
+      status.textContent = "Thank you! Submission isn't connected yet — this form will go live once the endpoint is added.";
+      status.style.color = "#0B4F45";
+      return;
+    }
+
+    status.textContent = "Sending...";
+    status.style.color = "#1E1912";
+
+    try {
+      const res = await fetch(TESTIMONIAL_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, edition, quote })
+      });
+      if (res.ok) {
+        status.textContent = "Thank you! Your testimonial has been submitted.";
+        status.style.color = "#0B4F45";
+        testiSubmitForm.reset();
+      } else {
+        status.textContent = "Something went wrong. Please try again later.";
+        status.style.color = "#B5563C";
+      }
+    } catch (err) {
+      status.textContent = "Something went wrong. Please try again later.";
+      status.style.color = "#B5563C";
+    }
+  });
+}
