@@ -49,6 +49,58 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
+// ---------- Countdown to Hijab Elegance Picnic (Sun 6 Sept 2026, 9:00 AM EAT) ----------
+const PICNIC_START = new Date("2026-09-06T09:00:00+03:00");
+const PICNIC_DAY_END = new Date("2026-09-07T00:00:00+03:00"); // midnight after picnic day
+
+function updateCountdown() {
+  const now = new Date();
+  const fullWrap = document.getElementById('countdownWrap');
+  const badge = document.getElementById('badgeCountdown');
+  const homeBanner = document.getElementById('upcomingBanner');
+
+  if (now >= PICNIC_DAY_END) {
+    // Picnic day has passed — hide everything countdown-related
+    if (fullWrap) fullWrap.classList.add('is-hidden');
+    if (badge) badge.style.display = 'none';
+    if (homeBanner) homeBanner.style.display = 'none';
+    return;
+  }
+
+  if (now >= PICNIC_START && now < PICNIC_DAY_END) {
+    // It's picnic day itself
+    if (fullWrap) {
+      fullWrap.classList.remove('is-hidden');
+      fullWrap.classList.add('is-today');
+    }
+    if (badge) badge.textContent = "Today!";
+    return;
+  }
+
+  // Still counting down
+  const diff = PICNIC_START - now;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  const dEl = document.getElementById('cdDays');
+  const hEl = document.getElementById('cdHours');
+  const mEl = document.getElementById('cdMinutes');
+  const sEl = document.getElementById('cdSeconds');
+  if (dEl) dEl.textContent = String(days);
+  if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+  if (mEl) mEl.textContent = String(minutes).padStart(2, '0');
+  if (sEl) sEl.textContent = String(seconds).padStart(2, '0');
+
+  if (badge) badge.textContent = days > 0 ? `${days}d to go` : `${hours}h to go`;
+}
+
+if (document.getElementById('countdownWrap') || document.getElementById('badgeCountdown')) {
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
+
 // ---------- Testimonial submission ----------
 // TODO: paste the real submission endpoint here once it's shared with you.
 const TESTIMONIAL_ENDPOINT = "PASTE_TESTIMONIAL_ENDPOINT_HERE";
