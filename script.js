@@ -120,6 +120,24 @@ if (document.getElementById('countdownWrap') || document.getElementById('badgeCo
   setInterval(updateCountdown, 1000);
 }
 
+// ---------- Testimonial rotator (auto-advances every 5s) ----------
+const testiSlides = document.querySelectorAll('.testi-slide');
+const testiDots = document.querySelectorAll('.testi-dot');
+if (testiSlides.length > 1) {
+  let testiIndex = 0;
+  function showTesti(i) {
+    testiSlides.forEach(s => s.classList.remove('active'));
+    testiDots.forEach(d => d.classList.remove('active'));
+    testiSlides[i].classList.add('active');
+    if (testiDots[i]) testiDots[i].classList.add('active');
+    testiIndex = i;
+  }
+  testiDots.forEach((dot, i) => dot.addEventListener('click', () => showTesti(i)));
+  setInterval(() => {
+    showTesti((testiIndex + 1) % testiSlides.length);
+  }, 5000);
+}
+
 // ---------- Testimonial submission ----------
 // TODO: paste the real submission endpoint here once it's shared with you.
 const TESTIMONIAL_ENDPOINT = "PASTE_TESTIMONIAL_ENDPOINT_HERE";
