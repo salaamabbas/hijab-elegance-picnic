@@ -8,10 +8,12 @@
 <link rel="apple-touch-icon" href="logo.jpeg">
 <meta property="og:title" content="Hijab Elegance Picnic — Salaam Safaris">
 <meta property="og:description" content="An annual sisterhood gathering by Salaam Safaris, celebrating faith, friendship and elegant modest dressing.">
-<meta property="og:image" content="logo.jpeg">
+<meta property="og:image" content="https://hijabelegancepicnic.org/logo.jpeg">
+<meta property="og:url" content="https://hijabelegancepicnic.org/">
+<link rel="canonical" href="https://hijabelegancepicnic.org/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="logo.jpeg">
+<meta name="twitter:image" content="https://hijabelegancepicnic.org/logo.jpeg">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -50,38 +52,58 @@
       </div>
     </div>
     <div class="drape reveal">
-      <div class="quadrant q-color"><img src="Nakiah.png" alt="Colour edition"></div>
-      <div class="quadrant q-black"><img src="hafswa.jpg" alt="Black edition"></div>
-      <div class="quadrant q-bw"><img src="bwbw2.jpg" alt="Black and white edition"></div>
-      <div class="quadrant q-derah"><img src="ddddd2.jpeg" alt="Derah edition"></div>
+      <div class="quadrant q-color"><span class="drape-num">1st</span><img src="Nakiah.png" alt="Colour edition"></div>
+      <div class="quadrant q-black"><span class="drape-num">2nd</span><img src="hafswa.jpg" alt="Black edition"></div>
+      <div class="quadrant q-bw"><span class="drape-num">3rd</span><img src="bwbw2.jpg" alt="Black and white edition"></div>
+      <div class="quadrant q-derah"><span class="drape-num">4th</span><img src="ddddd2.jpeg" alt="Derah edition"></div>
       <div class="drape-center"><img src="upcoming.png" alt="Khimar edition"><span>Khimar<br>Edition</span></div>
     </div>
   </div>
 </section>
 
-<div class="wrap quickfacts-wrap">
-  <a href="upcoming.html" style="text-decoration:none;">
-    <div class="quickfacts reveal" id="upcomingBanner">
-      <div class="qf-item">
-        <div class="qf-label">Khimar Edition</div>
-        <div class="qf-value" id="badgeCountdown">6 Sept 2026</div>
-      </div>
-      <div class="qf-item">
-        <div class="qf-label">Venue</div>
-        <div class="qf-value" style="font-size:1rem;">Nyungu ya Mawe, Kira</div>
-      </div>
-      <div class="qf-item">
-        <div class="qf-label">Entry Fee</div>
-        <div class="qf-value">UGX 80,000</div>
-      </div>
-      <div class="qf-item qf-cta">
-        <a href="upcoming.html">Get Your Ticket
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
+<section class="khimar-spotlight section-pad" id="khimar" data-hide-after-event="true">
+  <div class="wrap khimar-inner">
+    <span class="khimar-badge"><span class="dot"></span>Now Booking · Edition 05</span>
+    <h2>The Khimar Edition</h2>
+    <p class="lede">Our next Hijab Elegance Picnic is here — dressed entirely in Khimar. Sunday, 6 September 2026 at Nyungu ya Mawe Forest Park, Kira.</p>
+
+    <div class="khimar-meta-row">
+      <span>📅 Sunday, 6 September 2026 · 9:00 AM</span>
+      <span>📍 Nyungu ya Mawe Forest Park, Kira</span>
+      <span>🚌 Pickup: Arena Mall, Nsambya · 9:00 AM</span>
     </div>
-  </a>
-</div>
+
+    <div class="price-card">
+      <div class="price-urgent">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Be among the first 10 to book and save UGX 20,000
+      </div>
+      <div class="price-row">
+        <span class="price-old">UGX 80,000</span>
+        <span class="price-new">UGX 60,000</span>
+        <span class="price-save">Save 20K</span>
+      </div>
+      <p class="price-note">First 10 tickets only — price returns to UGX 80,000 after that.</p>
+    </div>
+
+    <div class="khimar-ctas" style="margin-top:28px;">
+      <a href="upcoming.html" class="btn btn-primary">Get Your Ticket Now</a>
+      <a href="upcoming.html#tickets" class="btn btn-ghost" style="color:var(--sand);border-color:rgba(251,247,239,0.4);">See What's Included</a>
+    </div>
+
+    <div class="countdown-wrap reveal khimar-countdown" id="countdownWrap">
+      <p class="countdown-label">Counting down to</p>
+      <h3 class="countdown-title">The Khimar Edition</h3>
+      <div class="countdown-grid">
+        <div class="countdown-unit"><div class="countdown-num" id="cdDays">–</div><div class="countdown-unit-label">Days</div></div>
+        <div class="countdown-unit"><div class="countdown-num" id="cdHours">–</div><div class="countdown-unit-label">Hours</div></div>
+        <div class="countdown-unit"><div class="countdown-num" id="cdMinutes">–</div><div class="countdown-unit-label">Minutes</div></div>
+        <div class="countdown-unit"><div class="countdown-num" id="cdSeconds">–</div><div class="countdown-unit-label">Seconds</div></div>
+      </div>
+      <p class="countdown-today">It's picnic day! See you at Nyungu ya Mawe Forest Park, Kira 🌿</p>
+    </div>
+  </div>
+</section>
 
 <section class="stats-strip section-pad" style="padding-top:64px;">
   <div class="wrap">
@@ -260,7 +282,7 @@
           <svg width="22" height="22" viewBox="0 0 32 32" fill="#fff"><path d="M16.04 2.67C8.84 2.67 3 8.5 3 15.7c0 2.53.7 4.9 1.93 6.93L2.67 29.33l6.9-2.2a13 13 0 0 0 6.47 1.7h.01c7.2 0 13.04-5.83 13.04-13.03 0-3.48-1.36-6.75-3.82-9.21a12.95 12.95 0 0 0-9.23-3.82z"/></svg>
         </div>
         <h3>Join our WhatsApp group</h3>
-        <p>Get first access to edition announcements, RSVP details, and community updates.</p>
+        <p>Get first access to edition announcements, RSVP details, and community updates. <strong>Sisters only, please.</strong></p>
         <a href="https://chat.whatsapp.com/ISmhewDWTvZDfrfrk0DAJQ?mode=gi_t" target="_blank" rel="noopener" class="btn btn-dark">Join WhatsApp Group</a>
       </div>
       <div class="contact-card">
@@ -324,7 +346,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Salaam Safaris — Hijab Elegance Picnic</span>
-      <span>Website by Abdulsalaam Abbas</span>
+      <span>Website by <a href="portfolio.html" style="color:inherit;text-decoration:underline;">Abdulsalaam Abbas</a></span>
     </div>
   </div>
 </footer>

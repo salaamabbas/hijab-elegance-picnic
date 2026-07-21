@@ -78,13 +78,11 @@ const PICNIC_DAY_END = new Date("2026-09-07T00:00:00+03:00"); // midnight after 
 function updateCountdown() {
   const now = new Date();
   const fullWrap = document.getElementById('countdownWrap');
-  const badge = document.getElementById('badgeCountdown');
-  const homeBanner = document.getElementById('upcomingBanner');
+  const hideTargets = document.querySelectorAll('[data-hide-after-event="true"]');
 
   if (now >= PICNIC_DAY_END) {
     if (fullWrap) fullWrap.classList.add('is-hidden');
-    if (badge) badge.style.display = 'none';
-    if (homeBanner) homeBanner.style.display = 'none';
+    hideTargets.forEach(el => el.style.display = 'none');
     return;
   }
 
@@ -93,7 +91,6 @@ function updateCountdown() {
       fullWrap.classList.remove('is-hidden');
       fullWrap.classList.add('is-today');
     }
-    if (badge) badge.textContent = "Today!";
     return;
   }
 
@@ -111,11 +108,9 @@ function updateCountdown() {
   if (hEl) hEl.textContent = String(hours).padStart(2, '0');
   if (mEl) mEl.textContent = String(minutes).padStart(2, '0');
   if (sEl) sEl.textContent = String(seconds).padStart(2, '0');
-
-  if (badge) badge.textContent = days > 0 ? `${days}d to go` : `${hours}h to go`;
 }
 
-if (document.getElementById('countdownWrap') || document.getElementById('badgeCountdown')) {
+if (document.getElementById('countdownWrap') || document.querySelectorAll('[data-hide-after-event="true"]').length) {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 }
@@ -140,7 +135,7 @@ if (testiSlides.length > 1) {
 
 // ---------- Testimonial submission ----------
 // TODO: paste the real submission endpoint here once it's shared with you.
-const TESTIMONIAL_ENDPOINT = "PASTE_TESTIMONIAL_ENDPOINT_HERE";
+const TESTIMONIAL_ENDPOINT = "https://formspree.io/f/xnjqqgor";
 
 const testiToggle = document.getElementById('testiToggle');
 const testiForm = document.getElementById('testiForm');
@@ -177,8 +172,11 @@ if (testiSubmitForm) {
     try {
       const res = await fetch(TESTIMONIAL_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, edition, quote })
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({ name, edition, quote, message: `Testimonial from ${name} (${edition || "edition not specified"}): ${quote}` })
       });
       if (res.ok) {
         status.textContent = "Thank you! Your testimonial has been submitted.";
