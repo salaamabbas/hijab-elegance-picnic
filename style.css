@@ -203,7 +203,7 @@ nav{display:flex;align-items:center;justify-content:space-between;max-width:1180
 .marquee-wrap:hover .marquee-track{animation-play-state:paused;}
 @keyframes marqueeScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 .marquee-logo{height:64px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.marquee-logo img{height:100%;width:auto;max-width:160px;object-fit:contain;}
+.marquee-logo img{height:400%;width:auto;max-width:160px;object-fit:contain;}
 .sponsor-cta{text-align:center;margin-top:36px;}
 .sponsor-cta p{margin:0 0 16px;color:rgba(30,25,18,0.65);font-size:0.92rem;}
 
