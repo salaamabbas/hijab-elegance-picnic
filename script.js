@@ -9,7 +9,7 @@ if (navToggle) {
 // nav dropdown (About Us) — toggles on mobile, hover on desktop via CSS
 document.querySelectorAll('.has-dropdown > a').forEach(link => {
   link.addEventListener('click', (e) => {
-    if (window.innerWidth <= 760) {
+    if (window.innerWidth <= 820) {
       e.preventDefault();
       link.closest('.has-dropdown').classList.toggle('open');
     }
@@ -49,6 +49,28 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
+// ---------- Stats count-up ----------
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1200;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      statObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.stat-num[data-count]').forEach(el => statObserver.observe(el));
+
 // ---------- Countdown to Hijab Elegance Picnic (Sun 6 Sept 2026, 9:00 AM EAT) ----------
 const PICNIC_START = new Date("2026-09-06T09:00:00+03:00");
 const PICNIC_DAY_END = new Date("2026-09-07T00:00:00+03:00"); // midnight after picnic day
@@ -60,7 +82,6 @@ function updateCountdown() {
   const homeBanner = document.getElementById('upcomingBanner');
 
   if (now >= PICNIC_DAY_END) {
-    // Picnic day has passed — hide everything countdown-related
     if (fullWrap) fullWrap.classList.add('is-hidden');
     if (badge) badge.style.display = 'none';
     if (homeBanner) homeBanner.style.display = 'none';
@@ -68,7 +89,6 @@ function updateCountdown() {
   }
 
   if (now >= PICNIC_START && now < PICNIC_DAY_END) {
-    // It's picnic day itself
     if (fullWrap) {
       fullWrap.classList.remove('is-hidden');
       fullWrap.classList.add('is-today');
@@ -77,7 +97,6 @@ function updateCountdown() {
     return;
   }
 
-  // Still counting down
   const diff = PICNIC_START - now;
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -113,7 +132,7 @@ if (testiToggle && testiForm) {
   });
 }
 
-const testiSubmitForm = document.getElementById('testiSubmitForm');
+const testiSubmitForm = document.getElementById('testiForm');
 if (testiSubmitForm) {
   testiSubmitForm.addEventListener('submit', async (e) => {
     e.preventDefault();
